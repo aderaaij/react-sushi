@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
 
+import { Html, OrbitControls } from "@react-three/drei";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Canvas camera={{ fov: 45, position: [-8, 6, -8] }}>
+    <color attach="background" args={["#98ddca"]} />
+    <Suspense fallback={<Html center>loading...</Html>}>
+      <ambientLight intensity={1} />
+      <group
+        position={[9.46, 13.38, -9.46]}
+        rotation={[0, Math.PI / 4, -Math.PI / 4]}
+        scale={[1.65, 1.65, 1.65]}
+      >
+        <directionalLight
+          intensity={3}
+          decay={0}
+          rotation={[Math.PI / 2, 0, 0]}
+        />
+        <spotLight intensity={0.5}></spotLight>
+      </group>
+     
+    </Suspense>
+    {/* <OrbitControls /> */}
+  </Canvas>
   );
 }
 
